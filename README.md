@@ -1,4 +1,4 @@
-# Products microservice
+# Store microservice
 
 ## Local development
 
