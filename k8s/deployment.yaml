@@ -17,13 +17,13 @@ spec:
           name: store-catalog
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
-              value: jdbc:postgresql://mouse.db.elephantsql.com:5432/sqpivtck
+              value: jdbc:postgresql://mouse.db.elephantsql.com:5432/atdzsndu
             - name: KUMULUZEE_DATASOURCES0_USERNAME
-              value: sqpivtck
+              value: atdzsndu
             - name: KUMULUZEE_DATASOURCES0_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: database-password
+                  name: store-catalog-database-password
                   key: KUMULUZEE_DATASOURCES0_PASSWORD
           ports:
             - containerPort: 8080
