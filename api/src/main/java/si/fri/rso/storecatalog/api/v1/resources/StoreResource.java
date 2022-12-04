@@ -94,7 +94,7 @@ public class StoreResource {
             required = true, content = @Content(
             schema = @Schema(implementation = Store.class))) Store store) {
 
-        if ((store.getName() == null || store.getDescription() == null || store.getImage() == null)) {
+        if ((store.getName() == null || store.getDescription() == null || store.getUrl() == null)) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         } else {
             store = storeBean.createStore(store);

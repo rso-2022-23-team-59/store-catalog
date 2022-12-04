@@ -11,7 +11,7 @@ public class StoreConverter {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
-        dto.setImage(entity.getImage());
+        dto.setUrl(entity.getUrl());
         return dto;
 
     }
@@ -21,7 +21,7 @@ public class StoreConverter {
         StoreEntity entity = new StoreEntity();
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
-        entity.setImage(dto.getImage());
+        entity.setUrl(dto.getUrl());
 
         return entity;
 

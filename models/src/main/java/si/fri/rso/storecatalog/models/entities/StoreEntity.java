@@ -21,8 +21,8 @@ public class StoreEntity {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "image")
-    private String image;
+    @Column(name = "url")
+    private String url;
 
     public Integer getId() {
         return id;
@@ -48,11 +48,11 @@ public class StoreEntity {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getUrl() {
+        return url;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

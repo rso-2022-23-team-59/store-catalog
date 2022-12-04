@@ -5,7 +5,7 @@ public class Store {
     private Integer id;
     private String name;
     private String description;
-    private String image;
+    private String url;
 
     public Integer getId() {
         return id;
@@ -31,12 +31,12 @@ public class Store {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getUrl() {
+        return url;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setUrl(String url) {
+        this.url = url;
     }
     
 }
