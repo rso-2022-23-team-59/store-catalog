@@ -13,7 +13,7 @@ spec:
         app: store-catalog
     spec:
       containers:
-        - image: metatheory/store-catalog:latest
+        - image: aljazv/store-catalog:latest
           name: store-catalog
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
