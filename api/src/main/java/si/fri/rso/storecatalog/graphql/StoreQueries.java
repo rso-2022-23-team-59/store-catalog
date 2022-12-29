@@ -1,48 +1,66 @@
 package si.fri.rso.storecatalog.graphql;
 
-import com.kumuluz.ee.graphql.annotations.GraphQLClass;
-import com.kumuluz.ee.graphql.classes.Filter;
-import com.kumuluz.ee.graphql.classes.Pagination;
-import com.kumuluz.ee.graphql.classes.PaginationWrapper;
-import com.kumuluz.ee.graphql.classes.Sort;
-import com.kumuluz.ee.graphql.utils.GraphQLUtils;
-import com.kumuluz.ee.rest.utils.QueryStringDefaults;
-import io.leangen.graphql.annotations.GraphQLArgument;
-import io.leangen.graphql.annotations.GraphQLQuery;
+import com.kumuluz.ee.graphql.mp.utils.GraphQLUtils;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import org.eclipse.microprofile.graphql.GraphQLApi;
+import org.eclipse.microprofile.graphql.Mutation;
+import org.eclipse.microprofile.graphql.Name;
+import org.eclipse.microprofile.graphql.Query;
+
+import si.fri.rso.storecatalog.api.v1.lib.StoreWrapper;
+import si.fri.rso.storecatalog.api.v1.lib.StoreWrapperConverter;
 import si.fri.rso.storecatalog.lib.Store;
 import si.fri.rso.storecatalog.services.beans.StoreBean;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import javax.enterprise.context.RequestScoped;
+import com.kumuluz.ee.rest.utils.QueryStringDefaults;
 
-@GraphQLClass
-@ApplicationScoped
+import javax.inject.Inject;
+
+import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+@GraphQLApi
+@RequestScoped
 public class StoreQueries {
+
+    private Logger log = Logger.getLogger(StoreQueries.class.getName());
 
     @Inject
     private StoreBean storeBean;
 
-    // TODO: Either use this entity manager or remove it
     @Inject
-    private EntityManager em;
+    private QueryStringDefaults qsd;
 
-    // TODO: Either use this defaults or remove them
-    @Inject
-    private QueryStringDefaults queryStringDefaults;
 
-    @GraphQLQuery
-    public PaginationWrapper<Store> getStores(@GraphQLArgument(name = "pagination") Pagination pagination,
-                                                     @GraphQLArgument(name = "sort") Sort sort,
-                                                     @GraphQLArgument(name = "filter") Filter filter) {
-        // TODO: Use non-deprecated method?
-        // return GraphQLUtils.process(em, StoreEntity.class, pagination, sort, filter).getResult().stream().map(StoreConverter::toDto);
-        return GraphQLUtils.process(storeBean.getStores(), pagination, sort, filter);
+
+    @Query
+    public List<StoreWrapper> getAllStores() {
+        QueryParameters qp = GraphQLUtils.queryParametersBuilder()
+                .withQueryStringDefaults(qsd)
+                .build();
+        return storeBean.getStoreFilter(qp).stream().map(StoreWrapperConverter::toDto).collect(Collectors.toList());
     }
 
-    @GraphQLQuery
-    public Store getStore(@GraphQLArgument(name = "id") Integer id) {
-        return storeBean.getStore(id);
+    @Query
+    public StoreWrapper getStore(@Name("storeId") Integer storeId) {
+
+        return StoreWrapperConverter.toDto(storeBean.getStore(storeId));
     }
+
+    @Mutation
+    public StoreWrapper addStore(@Name("store") StoreWrapper storew){
+        Store store = StoreWrapperConverter.toStore(storew);
+        Store newStore = storeBean.createStore(store);
+        return StoreWrapperConverter.toDto(newStore);
+    }
+
+    @Mutation
+    public int deleteStore(@Name("storeId") Integer storeId){
+        storeBean.deleteStore(storeId);
+        return 1;
+    }
+
 
 }

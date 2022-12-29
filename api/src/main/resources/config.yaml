@@ -13,11 +13,3 @@ kumuluzee:
       username: dbuser
       password: postgres
       max-pool-size: 20
-  graphql:
-    schema:
-      include-scalars: true
-      include-schema-definition: true
-      include-directives: true
-      include-introspection-types: true
-    metrics:
-      enabled: true
