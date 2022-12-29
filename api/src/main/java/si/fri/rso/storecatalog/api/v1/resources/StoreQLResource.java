@@ -6,7 +6,8 @@ import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Name;
 import org.eclipse.microprofile.graphql.Query;
 
-import org.eclipse.microprofile.graphql.Source;
+import si.fri.rso.storecatalog.api.v1.lib.StoreWrapper;
+import si.fri.rso.storecatalog.api.v1.lib.StoreWrapperConverter;
 import si.fri.rso.storecatalog.lib.Store;
 import si.fri.rso.storecatalog.services.beans.StoreBean;
 
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @GraphQLApi
 @RequestScoped
@@ -30,17 +32,20 @@ public class StoreQLResource {
     @Inject
     private QueryStringDefaults qsd;
 
+
+
     @Query
-    public List<Store> getAllStores() {
+    public List<StoreWrapper> getAllStores() {
         QueryParameters qp = GraphQLUtils.queryParametersBuilder()
                 .withQueryStringDefaults(qsd)
                 .build();
-        return storeBean.getStoreFilter(qp);
+        return storeBean.getStoreFilter(qp).stream().map(StoreWrapperConverter::toDto).collect(Collectors.toList());
     }
 
     @Query
-    public Store getStore(@Name("storeId") Integer storeId) {
-        return storeBean.getStore(storeId);
+    public StoreWrapper getStore(@Name("storeId") Integer storeId) {
+
+        return StoreWrapperConverter.toDto(storeBean.getStore(storeId));
     }
 
 }
