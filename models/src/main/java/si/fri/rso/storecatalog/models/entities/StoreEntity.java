@@ -1,13 +1,14 @@
 package si.fri.rso.storecatalog.models.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "stores")
 @NamedQueries(
     value = {@NamedQuery(name = "StoreEntity.getAll", query = "SELECT stores FROM StoreEntity stores")}
 )
-public class StoreEntity {
+public class StoreEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

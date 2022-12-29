@@ -33,9 +33,7 @@ public class StoreBean {
         return resultList.stream().map(StoreConverter::toDto).collect(Collectors.toList());
     }
 
-    public List<Store> getStoreFilter(UriInfo uriInfo) {
-        QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
-                .build();
+    public List<Store> getStoreFilter(QueryParameters queryParameters) {
         return JPAUtils.queryEntities(em, StoreEntity.class, queryParameters).stream()
                 .map(StoreConverter::toDto).collect(Collectors.toList());
     }

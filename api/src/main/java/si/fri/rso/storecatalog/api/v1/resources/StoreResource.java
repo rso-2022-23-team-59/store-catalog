@@ -1,5 +1,7 @@
 package si.fri.rso.storecatalog.api.v1.resources;
 
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
@@ -47,7 +49,9 @@ public class StoreResource {
     })
     @GET
     public Response getAllStores() {
-        List<Store> stores = storeBean.getStoreFilter(uriInfo);
+        QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
+                .build();
+        List<Store> stores = storeBean.getStoreFilter(queryParameters);
         return Response.ok(stores).header("X-Total-Count", stores.size()).build();
     }
 

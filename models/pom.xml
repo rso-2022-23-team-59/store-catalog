@@ -17,6 +17,7 @@
             <artifactId>kumuluzee-jpa-eclipselink</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>si.fri.rso.samples</groupId>
             <artifactId>store-catalog-lib</artifactId>
