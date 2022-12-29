@@ -18,5 +18,16 @@ public class StoreWrapperConverter {
 
     }
 
+    public static Store toStore(StoreWrapper entity) {
+
+        Store dto = new Store();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setDescription(entity.getDescription());
+        dto.setUrl(entity.getUrl());
+        return dto;
+
+    }
+
 
 }

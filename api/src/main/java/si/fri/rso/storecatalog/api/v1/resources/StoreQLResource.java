@@ -3,6 +3,7 @@ package si.fri.rso.storecatalog.api.v1.resources;
 import com.kumuluz.ee.graphql.mp.utils.GraphQLUtils;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import org.eclipse.microprofile.graphql.GraphQLApi;
+import org.eclipse.microprofile.graphql.Mutation;
 import org.eclipse.microprofile.graphql.Name;
 import org.eclipse.microprofile.graphql.Query;
 
@@ -47,5 +48,19 @@ public class StoreQLResource {
 
         return StoreWrapperConverter.toDto(storeBean.getStore(storeId));
     }
+
+    @Mutation
+    public StoreWrapper addStore(@Name("store") StoreWrapper storew){
+        Store store = StoreWrapperConverter.toStore(storew);
+        Store newStore = storeBean.createStore(store);
+        return StoreWrapperConverter.toDto(newStore);
+    }
+
+    @Mutation
+    public int deleteStore(@Name("storeId") Integer storeId){
+        storeBean.deleteStore(storeId);
+        return 1;
+    }
+
 
 }
