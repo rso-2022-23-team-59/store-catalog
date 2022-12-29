@@ -19,3 +19,5 @@ kumuluzee:
       include-schema-definition: true
       include-directives: true
       include-introspection-types: true
+    metrics:
+      enabled: true
