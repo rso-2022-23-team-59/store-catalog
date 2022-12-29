@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.NotFoundException;
-import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -13,7 +12,6 @@ import java.util.stream.Collectors;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 
-import si.fri.rso.storecatalog.lib.Store;
 import si.fri.rso.storecatalog.lib.Store;
 import si.fri.rso.storecatalog.models.converters.StoreConverter;
 import si.fri.rso.storecatalog.models.entities.StoreEntity;
@@ -27,7 +25,7 @@ public class StoreBean {
     @Inject
     private EntityManager em;
 
-    public List<Store> getStoress() {
+    public List<Store> getStores() {
         TypedQuery<StoreEntity> query = em.createNamedQuery("StoreEntity.getAll", StoreEntity.class);
         List<StoreEntity> resultList = query.getResultList();
         return resultList.stream().map(StoreConverter::toDto).collect(Collectors.toList());

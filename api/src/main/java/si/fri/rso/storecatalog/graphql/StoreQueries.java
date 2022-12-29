@@ -37,7 +37,7 @@ public class StoreQueries {
                                                      @GraphQLArgument(name = "filter") Filter filter) {
         // TODO: Use non-deprecated method?
         // return GraphQLUtils.process(em, StoreEntity.class, pagination, sort, filter).getResult().stream().map(StoreConverter::toDto);
-        return GraphQLUtils.process(storeBean.getStoress(), pagination, sort, filter);
+        return GraphQLUtils.process(storeBean.getStores(), pagination, sort, filter);
     }
 
     @GraphQLQuery
