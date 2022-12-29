@@ -97,6 +97,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.parboiled</groupId>
+                <artifactId>parboiled-java</artifactId>
+                <version>1.4.1</version>
+            </dependency>
+
+            <dependency>
                 <groupId>si.fri.rso.samples</groupId>
                 <artifactId>store-catalog-api</artifactId>
                 <version>${project.version}</version>
