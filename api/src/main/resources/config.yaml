@@ -9,7 +9,7 @@ kumuluzee:
       port: 8080
   datasources:
     - jndi-name: jdbc/StoresDS
-      connection-url: jdbc:postgresql://localhost:5432/storess
+      connection-url: jdbc:postgresql://localhost:5432/stores
       username: dbuser
       password: postgres
       max-pool-size: 20
@@ -19,3 +19,5 @@ kumuluzee:
       include-schema-definition: true
       include-directives: true
       include-introspection-types: true
+    metrics:
+      enabled: true
