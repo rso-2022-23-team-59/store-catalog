@@ -1,7 +1,6 @@
 package si.fri.rso.storecatalog.api.v1.resources;
 
 import com.kumuluz.ee.rest.beans.QueryParameters;
-import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
