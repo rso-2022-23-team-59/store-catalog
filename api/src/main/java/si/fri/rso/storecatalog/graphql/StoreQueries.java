@@ -1,5 +1,6 @@
 package si.fri.rso.storecatalog.graphql;
 
+import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import com.kumuluz.ee.graphql.mp.utils.GraphQLUtils;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import org.eclipse.microprofile.graphql.GraphQLApi;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 @GraphQLApi
 @RequestScoped
+@CrossOrigin(allowOrigin = "*")
 public class StoreQueries {
 
     private Logger log = Logger.getLogger(StoreQueries.class.getName());
