@@ -57,7 +57,12 @@ public class StoreQueries {
         Store newStore = storeBean.createStore(store);
         return StoreWrapperConverter.toDto(newStore);
     }
-
+    @Mutation
+    public StoreWrapper modifyStore(@Name("store") StoreWrapper storew){
+        Store store = StoreWrapperConverter.toStore(storew);
+        Store newStore = storeBean.putStore(store.getId(), store);
+        return StoreWrapperConverter.toDto(newStore);
+    }
     @Mutation
     public int deleteStore(@Name("storeId") Integer storeId){
         storeBean.deleteStore(storeId);
